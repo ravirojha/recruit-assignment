@@ -7,6 +7,7 @@ import SignUp from "./pages/signup";
 import Login from "./pages/login";
 import CompanyList from "./pages/company-list";
 import NotFound from "./pages/not-found";
+import Logout from "./components/atoms/logout";
 
 export const AuthContext = createContext();
 
@@ -27,6 +28,7 @@ function App() {
             <AuthContext.Provider value={{user, setUser}}>
                 <Toast/>
                 <Router>
+                    {user && <Logout/>}
                     <Routes>
                         {!user &&
                         <>

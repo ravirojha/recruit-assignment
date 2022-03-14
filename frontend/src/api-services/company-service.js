@@ -1,27 +1,45 @@
-import * as faker from 'faker';
-import {Util} from '../utils';
-import uuid from 'react-uuid';
+import axios from "axios";
+import {URL} from '../utils'
 
 
-export default class FoodService {
-    static fetchCompanies = async () => {
-        const companies = [];
-        await Util.sleep(2000);
-        for (let i = 0; i < 10; i++) {
-            const company = {
-                id: uuid(),
-                name: faker.company.name(),
-                website: faker.internet.url(),
-                phone: faker.phone.phoneNumber(),
-                address: faker.address.streetAddress(),
-                city: faker.address.city(),
-                state: faker.address.state(),
-                country: faker.address.country(),
-                industry: Math.random() > 0.5 ? (Math.random() > 0.5 ? 'Account' : 'IT' ) : (Math.random() > 0.5 ? 'Sales' : 'Health Care')
-            };
-            companies.push(company);
-            await Util.sleep(0.01);
-        }
-        return companies;
+export default class CompanyService {
+    static fetchCompanies = async ( {page = '1'}, {jwt}) => {
+        return  axios.get(`${URL}/company`,
+            {
+                headers: {
+                    jwt
+                },
+                params: {
+                    page
+                }
+            });
     };
+
+    static createCompany = async ({ name, website, phone, address, city, state, country, industry }, {jwt}) => {
+        return axios.post(`${URL}/company`,{ name, website, phone, address, city, state, country, industry },{
+            headers: {
+                jwt
+            }
+        })
+    }
+
+    static updateCompany = async(id,{ name, website, phone, address, city, state, country, industry }, {jwt}) => {
+        return axios.put(`${URL}/company/${id}`, { name, website, phone, address, city, state, country, industry },
+            {
+                headers: {
+                    jwt
+                }
+            }
+        )
+    }
+
+    static deleteCompany = async(id, {jwt}) => {
+        return axios.delete(`${URL}/company/${id}`,
+            {
+                headers: {
+                    jwt
+                }
+            }
+        )
+    }
 }

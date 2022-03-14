@@ -26,7 +26,7 @@ const bootstrap = async () => {
     const company = new Company();
       company.name = `Company ${i}`,
       company.website = faker.internet.url(),
-      company.phone = faker.phone.phoneNumber(),
+      company.phone = '999-999-9999',
       company.address = faker.address.streetAddress(),
       company.city = faker.address.city(),
       company.state = faker.address.state(),

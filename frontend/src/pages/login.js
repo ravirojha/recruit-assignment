@@ -74,7 +74,7 @@ const StyledComponent = styled.div`
   color: #fff;
   font-size: 1.14285714rem;
   cursor: pointer;
-  background-color: #db2828;
+  background-color: # ;
   height: 2.5rem;
   border-radius: 5px;
   font-weight: 600;
